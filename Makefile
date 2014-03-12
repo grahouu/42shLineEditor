@@ -3,62 +3,83 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acollin <acollin@student.42.fr>            +#+  +:+       +#+         #
+#    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2014/03/11 11:19:59 by acollin           #+#    #+#              #
-#    Updated: 2014/03/11 17:27:49 by acollin          ###   ########.fr        #
+#    Created: 2014/03/02 14:37:36 by cfeijoo           #+#    #+#              #
+#    Updated: 2014/03/12 18:20:29 by cfeijoo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+NAME = 42sh_line_editor
 
-NAME=ft_line_edit
-VERSION=1.0.9
-CFLAGS=-Wall -Werror -Wextra -g
-INCLUDES=-I ./libft/includes
-LIBS=-L ./libft -l ft -lcurses
+INCLUDEFOLDERS = -I./includes/ -I./libft/includes/
+LIBFOLDERS = -L./libft/
+LIBS =  -lft -lncurses
 
-SRC=global_newterm.c \
-	global_oldterm.c \
-	action_add_letter.c \
-	action_key_backspace.c \
-	action_key_left.c \
-	action_key_right.c \
-	key_arrow.c \
-	key_ctrl.c \
-	key_ctrl2.c \
-	main.c \
-	sh42_check_action.c \
-	sh42_default_term.c \
-	sh42_init_env.c \
-	sh42_init_term.c \
-	print_line.c \
+CC = clang
+CFLAGS = -Wall -Werror -Wextra
 
-OBJ=$(SRC:.c=.o)
+SOURCES_FOLDER = ./
+OBJECTS_FOLDER = objects/
 
-all: build $(NAME) finish
+SOURCES =	global_newterm.c				\
+			global_oldterm.c				\
+			action_add_letter.c				\
+			action_key_backspace.c			\
+			action_key_left.c				\
+			action_key_right.c				\
+			key_arrow.c						\
+			key_ctrl.c						\
+			key_ctrl2.c						\
+			main.c							\
+			sh42_check_action.c				\
+			sh42_default_term.c				\
+			sh42_init_env.c					\
+			sh42_init_term.c				\
+			print_line.c					\
 
-build:
-	@($(MAKE) -C ./libft)
+OBJECTS= $(SOURCES:.c=.o)
+OBJECTS := $(subst /,__,$(OBJECTS))
+OBJECTS := $(addprefix $(OBJECTS_FOLDER), $(OBJECTS))
+SOURCES := $(addprefix $(SOURCES_FOLDER),$(SOURCES))
 
-$(NAME): $(OBJ) ./libft/libft.a
-	gcc $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(LIBS)
+# Colors
+NO_COLOR =		\x1b[0m
+OK_COLOR =		\x1b[32;01m
+ERROR_COLOR =	\x1b[31;01m
+WARN_COLOR =	\x1b[33;01m
+SILENT_COLOR =	\x1b[30;01m
 
-%.o: %.c sh42.h ./libft/includes
-	gcc $(CFLAGS) $(INCLUDES) -o $@ -c $<
+.PHONY: all re clean fclean
 
-clean:
-	@(rm -rf $(OBJ))
+all: complibs $(NAME)
 
-fclean: clean
-	@(rm -rf $(NAME))
-	@($(MAKE) -C ./libft fclean)
+$(OBJECTS_FOLDER)%.o:
+	@$(CC) -c $(subst .o,.c,$(subst $(OBJECTS_FOLDER),$(SOURCES_FOLDER),$(subst __,/,$@))) $(INCLUDEFOLDERS) $(CFLAGS) $(MACROS) -o $@
+	@printf "$(OK_COLOR)✓ $(NO_COLOR)"
+	@echo "$(subst .o,.c,$(subst $(OBJECTS_FOLDER),$(SOURCES_FOLDER),$(subst __,/,$@)))"
 
-re: fclean all
+$(NAME) : $(OBJECTS)
+	@printf "$(SILENT_COLOR)Compiling $(NAME)...$(NO_COLOR)"
+	@$(CC) $(OBJECTS) $(INCLUDEFOLDERS) $(LIBFOLDERS) $(LIBS) $(CFLAGS) -o $(NAME)
+	@echo " $(OK_COLOR)Successful ✓$(NO_COLOR)"
 
-v:
-	@(echo "version: $(VERSION)")
+getlibs :
+	git clone https://bitbucket.org/vdefilip/libft/
 
-finish:
-	@(echo "[\033[32m$(NAME)\033[00m]")
+updatelibs :
+	@echo "$(SILENT_COLOR)Searching LibFt updates...$(NO_COLOR)"
+	@cd libft/ && git pull
 
-.PHONY: all build clean fclean re v
+complibs :
+	@make -C libft/
 
+clean :
+	@rm -f $(OBJECTS)
+	@echo "$(SILENT_COLOR)$(NAME) : Cleaned Objects$(NO_COLOR)"
+
+fclean : clean
+	@rm -f $(NAME)
+	@echo "$(SILENT_COLOR)$(NAME) : Cleaned Program$(NO_COLOR)"
+	@make -C "libft/" fclean
+
+re : fclean all
