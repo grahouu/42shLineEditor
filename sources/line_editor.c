@@ -6,16 +6,19 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 18:38:20 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/12 21:46:14 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/03/12 23:53:03 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include <line_editor.h>
+#include <keyboard.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <term.h>
+
+#include <stdio.h>
 
 int					ft_outc(int c)
 {
@@ -27,31 +30,33 @@ int					ft_outc(int c)
 	return (0);
 }
 
-static t_edited_line	*init_edited_line(void)
+static t_edited_line	*init_edited_line()
 {
-	t_edited_line		*info;
+	t_edited_line		*line;
 
-	info = malloc(sizeof(*info));
-	info->curs_pos = 0;
-	info->len_line = 0;
-	info->len_prompt = 11;
-	info->len_old_line = 0;
-	return (info);
+	line = malloc(sizeof(*line));
+	line->curs_pos = 0;
+	line->len_line = 0;
+	line->len_prompt = 11;
+	line->len_old_line = 0;
+	line->data = ft_lst_new(NULL);
+	return (line);
 }
 
 static char			*list_to_string(t_list *line)
 {
 	char			*string;
 	char			*current;
-	char			letter;
+	char			*letter;
 
 	string = (char*)malloc((line->len + 1) * sizeof(char));
 	if (string)
 	{
 		current = string;
-		while ((letter = (char)ft_lst_next_content(line)))
+		line->curr = NULL;
+		while ((letter = (char*)ft_lst_next_content(line)))
 		{
-			*current = letter;
+			*current = *letter;
 			current++;
 		}
 		*current = 0;
@@ -61,20 +66,14 @@ static char			*list_to_string(t_list *line)
 
 char				*line_editor(char *prompt)
 {
-	char			buf[5] = {0};
-	t_list			*line;
-	t_edited_line		*info;
+	int				ret;
+	t_edited_line	*line;
 
-	info = init_edited_line();
-	line = ft_lst_new(NULL);
-	while (1)
-	{
-		ft_putstr(prompt);
-		while (1)
-		{
-			ft_strclr(buf);
-			read(0, buf, 4);
-		}
-	}
-	return (list_to_string(line));
+	line = init_edited_line();
+	ret = 1;
+	ft_putstr(prompt);
+	while ((ret = check_keyboard(line)) > 0);
+	if (ret < 0)
+		return (NULL);
+	return (list_to_string(line->data));
 }

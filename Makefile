@@ -6,7 +6,7 @@
 #    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 14:37:36 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/03/12 21:28:13 by cfeijoo          ###   ########.fr        #
+#    Updated: 2014/03/12 22:10:35 by cfeijoo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = 42sh_line_editor
@@ -26,12 +26,13 @@ SOURCES =	\
 			display_init.c					\
 			display_restore.c				\
 											\
-			print_line.c					\
-			action_add_letter.c				\
-			action_key_backspace.c			\
-			action_key_left.c				\
-			action_key_right.c				\
+			keyboard/keyboard.c				\
+			actions/action_add_letter.c		\
+			actions/action_key_backspace.c	\
+			actions/action_key_left.c		\
+			actions/action_key_right.c		\
 											\
+			print_line.c					\
 			main.c							\
 
 OBJECTS= $(SOURCES:.c=.o)
