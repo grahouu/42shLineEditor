@@ -6,7 +6,7 @@
 #    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 14:37:36 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/03/12 18:20:29 by cfeijoo          ###   ########.fr        #
+#    Updated: 2014/03/12 18:33:43 by cfeijoo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = 42sh_line_editor
@@ -18,7 +18,7 @@ LIBS =  -lft -lncurses
 CC = clang
 CFLAGS = -Wall -Werror -Wextra
 
-SOURCES_FOLDER = ./
+SOURCES_FOLDER = sources/
 OBJECTS_FOLDER = objects/
 
 SOURCES =	global_newterm.c				\
