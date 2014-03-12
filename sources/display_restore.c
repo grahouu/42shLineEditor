@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh42_init_env.c                                    :+:      :+:    :+:   */
+/*   display_restore.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acollin <acollin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/12 14:59:30 by acollin           #+#    #+#             */
-/*   Updated: 2014/02/18 14:48:52 by acollin          ###   ########.fr       */
+/*   Created: 2014/01/12 13:31:07 by acollin           #+#    #+#             */
+/*   Updated: 2014/03/12 21:46:09 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <line_editor_static.h>
+#include <term.h>
 #include <stdlib.h>
-#include "libft.h"
 
-void		sh42_init_env(void)
+void			line_editor_restore_display(struct termios *display_backup)
 {
-	extern char		**environ;
-	char			**env;
-	int				i;
-
-	i = 0;
-	while (environ[i])
-		i++;
-	if (!(env = (char **)(malloc(sizeof(char *) * (i + 1)))))
-		return ;
-	env[i] = '\0';
-	while (i--)
-		env[i] = ft_strdup(environ[i]);
+	if (tcsetattr(0, TCSANOW, display_backup) == -1)
+		exit(-1);
+	tputs(tgetstr("te", NULL), 1, ft_outc);
+	tputs(tgetstr("ei", NULL), 1, ft_outc);
 }

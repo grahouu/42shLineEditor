@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   line_editor.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/12 14:51:21 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/12 21:47:01 by cfeijoo          ###   ########.fr       */
+/*   Created: 2014/02/12 14:58:49 by acollin           #+#    #+#             */
+/*   Updated: 2014/03/12 21:51:26 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <line_editor.h>
-#include <stdio.h>
+#ifndef LINE_EDITOR_H
+# define LINE_EDITOR_H
 
-int					main(int argc, char **argv)
+# include <libft.h>
+# include <termios.h>
+
+typedef struct		s_edited_line
 {
-	char			*edited_line;
-	struct termios	display_backup;
-	
-	line_editor_init_display(&display_backup);
-	if (argc > 1)
-		edited_line = line_editor(argv[1]);
-	else
-		edited_line = line_editor("My Prompt> ");
-	line_editor_restore_display(&display_backup);
-	printf("\n\n%s\n", edited_line);
-	return (0);
-}
+	t_list			*data;
+	int				curs_pos;
+	int				len_line;
+	int				len_prompt;
+	int				len_old_line;
+}					t_edited_line;
+
+char		*line_editor(char *prompt);
+int			line_editor_init_display(struct termios *display_backup);
+void		line_editor_restore_display(struct termios *display_backup);
+
+#endif

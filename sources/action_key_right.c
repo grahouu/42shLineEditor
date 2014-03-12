@@ -3,35 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   action_key_right.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acollin <acollin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/10 16:11:06 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/12 16:04:14 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/12 21:51:01 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh42.h"
+#include <line_editor_static.h>
+#include <term.h>
+#include <ncurses.h>
 
-static void			in_list(t_list *line, t_info *info)
+static void		in_list(t_edited_line *line)
 {
-	if (info->curs_pos > 1 && line->curr->next)
-		ft_lst_next_content(line);
+	if (line->curs_pos > 1 && line->data->curr->next)
+		ft_lst_next_content(line->data);
 }
 
-static void			in_display(t_info *info)
+static void		in_display(t_edited_line *line)
 {
-	if (info->curs_pos < info->len_line)
+	if (line->curs_pos < line->len_line)
 	{
 		tputs(tgetstr("nd", NULL), 1, ft_outc);
-		info->curs_pos++;
+		line->curs_pos++;
 	}
 }
 
-void				action_key_right(t_list *line, t_info *info)
+void			action_key_right(t_edited_line *line)
 {
-	if (line->curr)
+	if (line->data->curr)
 	{
-		in_list(line, info);
-		in_display(info);
+		in_list(line);
+		in_display(line);
 	}
 }

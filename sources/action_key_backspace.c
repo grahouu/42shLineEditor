@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   action_key_backspace.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acollin <acollin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/10 13:23:33 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/11 16:44:56 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/12 21:46:52 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh42.h"
+#include <line_editor_static.h>
+#include <stdlib.h>
 
-void			action_key_backspace(t_list *line, t_info *info)
+void			action_key_backspace(t_edited_line *line)
 {
-	if (info->curs_pos > 0)
+	if (line->curs_pos > 0)
 	{
-		ft_lst_del_atom(line, line->curr, &free);
-		info->curs_pos--;
-		info->len_old_line = info->len_line;
-		info->len_line--;
+		ft_lst_del_atom(line->data, line->data->curr, &free);
+		line->curs_pos--;
+		line->len_old_line = line->len_line;
+		line->len_line--;
 	}
 }

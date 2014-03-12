@@ -3,35 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   action_key_left.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acollin <acollin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/10 15:41:43 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/12 15:32:08 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/12 21:50:14 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh42.h"
+#include <line_editor_static.h>
+#include <term.h>
+#include <ncurses.h>
 
-static void			in_list(t_list *line)
+static void		in_list(t_list *data)
 {
-	if (line->curr->prev)
-		ft_lst_prev_content(line);
+	if (data->curr->prev)
+		ft_lst_prev_content(data);
 }
 
-static void			in_display(t_info *info)
+static void		in_display(t_edited_line *line)
 {
-	if (info->curs_pos > 0)
+	if (line->curs_pos > 0)
 	{
 		tputs(tgetstr("le", NULL), 1, ft_outc);
-		info->curs_pos--;
+		line->curs_pos--;
 	}
 }
 
-void			action_key_left(t_list *line, t_info *info)
+void			action_key_left(t_edited_line *line)
 {
-	if (line->curr)
+	if (line->data->curr)
 	{
-		in_list(line);
-		in_display(info);
+		in_list(line->data);
+		in_display(line);
 	}
 }

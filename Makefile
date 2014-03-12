@@ -6,7 +6,7 @@
 #    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 14:37:36 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/03/12 18:33:43 by cfeijoo          ###   ########.fr        #
+#    Updated: 2014/03/12 21:28:13 by cfeijoo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = 42sh_line_editor
@@ -21,21 +21,18 @@ CFLAGS = -Wall -Werror -Wextra
 SOURCES_FOLDER = sources/
 OBJECTS_FOLDER = objects/
 
-SOURCES =	global_newterm.c				\
-			global_oldterm.c				\
+SOURCES =	\
+			line_editor.c					\
+			display_init.c					\
+			display_restore.c				\
+											\
+			print_line.c					\
 			action_add_letter.c				\
 			action_key_backspace.c			\
 			action_key_left.c				\
 			action_key_right.c				\
-			key_arrow.c						\
-			key_ctrl.c						\
-			key_ctrl2.c						\
+											\
 			main.c							\
-			sh42_check_action.c				\
-			sh42_default_term.c				\
-			sh42_init_env.c					\
-			sh42_init_term.c				\
-			print_line.c					\
 
 OBJECTS= $(SOURCES:.c=.o)
 OBJECTS := $(subst /,__,$(OBJECTS))
