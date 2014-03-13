@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action_key_left.c                                  :+:      :+:    :+:   */
+/*   action_key_escape.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/03/10 15:41:43 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/12 21:50:14 by cfeijoo          ###   ########.fr       */
+/*   Created: 2014/03/13 23:18:31 by cfeijoo           #+#    #+#             */
+/*   Updated: 2014/03/13 23:21:10 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <line_editor_static.h>
 #include <term.h>
-#include <ncurses.h>
+#include <stdlib.h>
 
-static void		in_list(t_list *data)
-{
-	if (data->curr->prev)
-		ft_lst_prev_content(data);
-}
-
-static void		in_display(t_edited_line *line)
-{
-	if (line->curs_pos > 0)
+void	disable_escape(t_edited_line *line)
+{	
+	if (line->esc_key)
 	{
-		tputs(tgetstr("le", NULL), 1, ft_outc);
-		line->curs_pos--;
+		tputs(tgetstr("bl", NULL), 1, ft_outc);
+		line->esc_key = 0;
 	}
 }
 
-void			action_key_left(t_edited_line *line)
-{
-	if (line->data->curr)
+void	switch_escape(t_edited_line *line)
+{	
+	if (line->esc_key)
 	{
-		in_list(line->data);
-		in_display(line);
+		tputs(tgetstr("bl", NULL), 1, ft_outc);
+		line->esc_key = 0;
 	}
+	else
+		line->esc_key = 1;
 }

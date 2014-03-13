@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/12 14:51:21 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/13 02:01:04 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/03/13 22:29:00 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int					main(void)
 		ret = line_editor(&edited_line, prompt);
 		if (ret == CTRLD_VALUE)
 			break ;
-		// if (edited_line)
-		// 	printf("\n%s\n", edited_line);
+		if (edited_line)
+			printf("\n%s\n", edited_line);
 	}
 	line_editor_restore_display(&display_backup);
 	return (0);

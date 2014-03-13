@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_editor_static.h                               :+:      :+:    :+:   */
+/*   actions.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/12 14:58:49 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/13 22:27:25 by cfeijoo          ###   ########.fr       */
+/*   Created: 2014/03/13 22:56:54 by cfeijoo           #+#    #+#             */
+/*   Updated: 2014/03/14 00:04:46 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_EDITOR_STATIC_H
-# define LINE_EDITOR_STATIC_H
+#ifndef ACTIONS_H
+# define ACTIONS_H
 
-# include <line_editor.h>
-# include <termios.h>
+# include <line_editor_static.h>
 
-void			print_line(t_edited_line *line);
-int				ft_outc(int c);
+void	remove_previous_char(t_edited_line *line);
+void	remove_previous_word(t_edited_line *line);
+void	action_add_char(int letter, t_edited_line *line);
+void	disable_escape(t_edited_line *line);
+void	switch_escape(t_edited_line *line);
+void	move_cursor_right(t_edited_line *line);
+void	move_cursor_left(t_edited_line *line);
 
 #endif

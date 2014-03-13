@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action_key_backspace.c                             :+:      :+:    :+:   */
+/*   key_backspace.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/03/10 13:23:33 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/12 21:46:52 by cfeijoo          ###   ########.fr       */
+/*   Created: 2014/03/13 22:23:54 by cfeijoo           #+#    #+#             */
+/*   Updated: 2014/03/13 23:07:24 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <line_editor_static.h>
-#include <stdlib.h>
+#include <actions.h>
 
-void			action_key_backspace(t_edited_line *line)
+int			key_backspace_event(t_edited_line *line)
 {
 	if (line->curs_pos > 0)
 	{
-		ft_lst_del_atom(line->data, line->data->curr, &free);
-		line->curs_pos--;
-		line->len_old_line = line->len_line;
-		line->len_line--;
+		if (line->esc_key)
+		{
+			remove_previous_word(line);
+			line->esc_key = 0;
+		}
+		else
+			remove_previous_char(line);
 	}
+	return (1);
 }

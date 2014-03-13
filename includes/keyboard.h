@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 22:01:06 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/13 02:22:27 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/03/14 00:04:43 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,15 @@
 */
 # define CTRLD_VALUE		-20
 
-int		check_keyboard(t_edited_line *line);
+/*
+**	Lengths
+*/
+# define HARD_TAB_SIZE		4
 
-int		action_key_esc(t_edited_line *line);
+int		check_keyboard(t_edited_line *line);
+int		key_escape_event(t_edited_line *line);
+int		key_backspace_event(t_edited_line *line);
+int		key_left_event(t_edited_line *line);
+int		key_right_event(t_edited_line *line);
 
 #endif

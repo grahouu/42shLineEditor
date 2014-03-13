@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action_add_letter.c                                :+:      :+:    :+:   */
+/*   action_add_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/11 16:10:41 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/12 23:53:13 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/03/13 23:51:40 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <line_editor_static.h>
+#include <actions.h>
 #include <term.h>
 #include <curses.h>
 #include <stdlib.h>
 
-#include <stdio.h>
-
-void				action_add_letter(int letter, t_edited_line *line)
+void				action_add_char(int letter, t_edited_line *line)
 {
 	char			*new_char;
 
@@ -42,4 +41,5 @@ void				action_add_letter(int letter, t_edited_line *line)
 	line->len_line++;
 	print_line(line);
 	tputs(tgetstr("nd", NULL), 1, ft_outc);
+	disable_escape(line);
 }
