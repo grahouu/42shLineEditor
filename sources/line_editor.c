@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 18:38:20 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/12 23:53:03 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/03/13 02:28:19 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,12 @@ int					ft_outc(int c)
 	return (0);
 }
 
-static t_edited_line	*init_edited_line()
+static t_edited_line	*init_edited_line(char *prompt)
 {
 	t_edited_line		*line;
 
-	line = malloc(sizeof(*line));
-	line->curs_pos = 0;
-	line->len_line = 0;
-	line->len_prompt = 11;
-	line->len_old_line = 0;
+	line = ft_memalloc(sizeof(*line));
+	line->len_prompt = ft_strlen(prompt);
 	line->data = ft_lst_new(NULL);
 	return (line);
 }
@@ -64,16 +61,21 @@ static char			*list_to_string(t_list *line)
 	return (string);
 }
 
-char				*line_editor(char *prompt)
+static void			display_prompt(char *prompt)
+{
+	// If not at beginning of line, go back to new line
+	ft_putstr("\n");
+	ft_putstr(prompt);
+}
+
+int					line_editor(char **line, char *prompt)
 {
 	int				ret;
-	t_edited_line	*line;
+	t_edited_line	*edited_line;
 
-	line = init_edited_line();
-	ret = 1;
-	ft_putstr(prompt);
-	while ((ret = check_keyboard(line)) > 0);
-	if (ret < 0)
-		return (NULL);
-	return (list_to_string(line->data));
+	edited_line = init_edited_line(prompt);
+	display_prompt(prompt);
+	while ((ret = check_keyboard(edited_line)) > 0);
+	*line = list_to_string(edited_line->data);
+	return (ret);
 }

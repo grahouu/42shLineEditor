@@ -6,7 +6,7 @@
 #    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 14:37:36 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/03/12 22:10:35 by cfeijoo          ###   ########.fr        #
+#    Updated: 2014/03/13 02:22:02 by cfeijoo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = 42sh_line_editor
@@ -27,6 +27,8 @@ SOURCES =	\
 			display_restore.c				\
 											\
 			keyboard/keyboard.c				\
+			keyboard/key_escape.c			\
+											\
 			actions/action_add_letter.c		\
 			actions/action_key_backspace.c	\
 			actions/action_key_left.c		\

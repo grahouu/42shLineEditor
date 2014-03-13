@@ -6,13 +6,16 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 22:01:06 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/12 22:42:48 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/03/13 02:22:27 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEYBOARD_H
 # define KEYBOARD_H
 
+/*
+**	Keyboard entries values
+*/
 # define KEY_CTRL_A			1
 # define KEY_CTRL_C			3
 # define KEY_CTRL_D			4
@@ -51,6 +54,13 @@
 # define KEY_END			4610843
 # define KEY_HOME			4741915
 
+/*
+**	Shell return values
+*/
+# define CTRLD_VALUE		-20
+
 int		check_keyboard(t_edited_line *line);
+
+int		action_key_esc(t_edited_line *line);
 
 #endif

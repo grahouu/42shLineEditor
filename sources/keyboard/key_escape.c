@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_restore.c                                  :+:      :+:    :+:   */
+/*   key_escape.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/01/12 13:31:07 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/13 01:59:54 by cfeijoo          ###   ########.fr       */
+/*   Created: 2014/03/13 02:17:00 by cfeijoo           #+#    #+#             */
+/*   Updated: 2014/03/13 02:22:22 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <line_editor_static.h>
 #include <term.h>
-#include <stdlib.h>
+#include <ncurses.h>
 
-void			line_editor_restore_display(struct termios *display_backup)
+int				action_key_esc(t_edited_line *line)
 {
-	if (tcsetattr(0, TCSANOW, display_backup) == -1)
-		exit(-1);
-	tputs(tgetstr("te", NULL), 1, ft_outc);
+	if (line->pressed_escape)
+	{
+		tputs(tgetstr("bl", NULL), 1, ft_outc);
+		line->pressed_escape = 0;
+	}
+	else
+		line->pressed_escape = 1;
+	return (1);
 }
