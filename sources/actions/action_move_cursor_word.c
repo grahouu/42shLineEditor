@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action_remove_char.c                               :+:      :+:    :+:   */
+/*   action_move_cursor_word.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/03/13 22:55:00 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/14 02:15:45 by cfeijoo          ###   ########.fr       */
+/*   Created: 2014/03/14 02:12:40 by cfeijoo           #+#    #+#             */
+/*   Updated: 2014/03/14 02:24:38 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <line_editor_static.h>
-#include <stdlib.h>
 #include <term.h>
+#include <actions.h>
 
 static int	is_space(char c)
 {
@@ -30,30 +30,38 @@ static int	is_correct_word_char(char c)
 	return (0);
 }
 
-void		remove_previous_char(t_edited_line *line)
-{
-	ft_lst_del_atom(line->data, line->data->curr, &free);
-	line->curs_pos--;
-	line->len_old_line = line->len_line;
-	line->len_line--;
-	tputs(tgetstr("le", NULL), 1, ft_outc);
-	tputs(tgetstr("dc", NULL), 1, ft_outc);
-}
-
-void		remove_previous_word(t_edited_line *line)
+void		move_cursor_word_right(t_edited_line *line)
 {
 	char	c;
 
 	c = *(char*)line->data->curr->content;
 	if (!is_space(c) && !is_correct_word_char(c))
-		remove_previous_char(line);
+		move_cursor_right(line);
 	else
 	{
 		while (line->data->curr
 			&& is_space(*(char*)line->data->curr->content))
-			remove_previous_char(line);
+			move_cursor_right(line);
 		while (line->data->curr
 			&& is_correct_word_char(*(char*)line->data->curr->content))
-			remove_previous_char(line);
+			move_cursor_right(line);
+	}
+}
+
+void		move_cursor_word_left(t_edited_line *line)
+{
+	char	c;
+
+	c = *(char*)line->data->curr->content;
+	if (!is_space(c) && !is_correct_word_char(c))
+		move_cursor_left(line);
+	else
+	{
+		while (line->data->curr
+			&& is_space(*(char*)line->data->curr->content))
+			move_cursor_left(line);
+		while (line->data->curr
+			&& is_correct_word_char(*(char*)line->data->curr->content))
+			move_cursor_left(line);
 	}
 }

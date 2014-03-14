@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 22:01:06 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/14 00:04:43 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/03/14 02:33:13 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define KEY_ESC			27
 # define KEY_BACKSPACE		127
 # define KEY_RETURN			10
-# define KEY_DEL			2117294875
+# define KEY_DELETE			2117294875
 
 # define KEY_UP				4283163
 # define KEY_DOWN			4348699
@@ -67,6 +67,7 @@
 int		check_keyboard(t_edited_line *line);
 int		key_escape_event(t_edited_line *line);
 int		key_backspace_event(t_edited_line *line);
+int		key_delete_event(t_edited_line *line);
 int		key_left_event(t_edited_line *line);
 int		key_right_event(t_edited_line *line);
 
