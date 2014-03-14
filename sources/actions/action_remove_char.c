@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 22:55:00 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/14 02:15:45 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/03/14 15:16:28 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@ static int	is_correct_word_char(char c)
 
 void		remove_previous_char(t_edited_line *line)
 {
-	ft_lst_del_atom(line->data, line->data->curr, &free);
-	line->curs_pos--;
-	line->len_old_line = line->len_line;
-	line->len_line--;
-	tputs(tgetstr("le", NULL), 1, ft_outc);
-	tputs(tgetstr("dc", NULL), 1, ft_outc);
+	t_atom	*new_curr;
+
+	if (line->data->curr)
+	{
+		new_curr = line->data->curr->prev;
+		ft_lst_del_atom(line->data, line->data->curr, &free);
+		line->data->curr = new_curr;
+		tputs(tgetstr("le", NULL), 1, ft_outc);
+		tputs(tgetstr("dc", NULL), 1, ft_outc);
+	}
 }
 
 void		remove_previous_word(t_edited_line *line)

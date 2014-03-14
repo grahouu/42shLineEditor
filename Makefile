@@ -6,12 +6,12 @@
 #    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 14:37:36 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/03/14 02:34:47 by cfeijoo          ###   ########.fr        #
+#    Updated: 2014/03/14 15:47:06 by acollin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = 42sh_line_editor
 
-INCLUDEFOLDERS = -I./includes/ -I./libft/includes/
+INCLUDEFOLDERS = -I./includes/ -I./libft/includes/ -g
 LIBFOLDERS = -L./libft/
 LIBS =  -lft -lncurses
 

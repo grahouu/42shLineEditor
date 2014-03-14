@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 21:55:54 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/14 02:32:23 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/03/14 15:49:36 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <unistd.h>
 #include <term.h>
 #include <actions.h>
+#include <stdio.h>
 
 static int		key_ctrl_d(t_edited_line *line)
 {
@@ -56,7 +57,11 @@ int				check_keyboard(t_edited_line *line)
 
 	key = 0;
 	read(0, (char*)&key, 4);
-	if (key == KEY_ESC)
+/*	if (line->data->curr)
+		fprintf(fopen("/dev/ttys001", "w"), "%c\n", *((char *)line->data->curr->content));
+	else
+		fprintf(fopen("/dev/ttys001", "w"), "(NULL)\n");
+*/	if (key == KEY_ESC)
 		return (key_escape_event(line));
 	if (line->esc_key)
 		return (check_escaped_keyboard(line, key));
@@ -75,5 +80,6 @@ int				check_keyboard(t_edited_line *line)
 	if (key == KEY_DELETE)
 		return (key_delete_event(line));
 	action_add_char(key, line);
+//	fprintf(fopen("/dev/ttys001", "w"), "%c\n", *((char *)line->data->curr->content));
 	return (1);
 }
