@@ -6,25 +6,21 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 23:45:10 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/14 14:51:02 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/19 00:01:14 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_editor_static.h"
+#include "libft.h"
+#include "actions.h"
 #include <term.h>
-#include <stdio.h>
+#include <sys/ioctl.h>
 
-static void		in_list(t_list *data)
+void				move_cursor_left(t_edited_line *line)
 {
-	if (data->curr)
-		ft_lst_prev_content(data);
-}
-
-void			move_cursor_left(t_edited_line *line)
-{
-	if (line->data->curr)
-	{
-		in_list(line->data);
-		tputs(tgetstr("le", NULL), 1, ft_outc);
-	}
+	ft_lst_prev_content(line->data);
+	if (line->data->curr != line->data->last)
+		reposition_cursor_curr(line, 1);
+	else
+		ft_lst_next_content(line->data);
 }

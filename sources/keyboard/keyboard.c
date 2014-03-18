@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 21:55:54 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/14 15:49:36 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/16 20:02:14 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ int				check_keyboard(t_edited_line *line)
 	if (key == KEY_DELETE)
 		return (key_delete_event(line));
 	action_add_char(key, line);
-//	fprintf(fopen("/dev/ttys001", "w"), "%c\n", *((char *)line->data->curr->content));
+//	fprintf(fopen("/dev/ttys001", "w"), "%s\n", tgetstr("ch", NULL));
 	return (1);
 }

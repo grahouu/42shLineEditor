@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 22:55:00 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/14 15:16:28 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/14 18:57:10 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,15 @@ static int	is_correct_word_char(char c)
 	return (0);
 }
 
+void		print_line_remove(t_edited_line *);
+
 void		remove_previous_char(t_edited_line *line)
 {
-	t_atom	*new_curr;
-
 	if (line->data->curr)
 	{
-		new_curr = line->data->curr->prev;
 		ft_lst_del_atom(line->data, line->data->curr, &free);
-		line->data->curr = new_curr;
 		tputs(tgetstr("le", NULL), 1, ft_outc);
-		tputs(tgetstr("dc", NULL), 1, ft_outc);
+		print_line_remove(line);
 	}
 }
 

@@ -6,14 +6,14 @@
 #    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 14:37:36 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/03/14 15:47:06 by acollin          ###   ########.fr        #
+#    Updated: 2014/03/17 16:16:35 by acollin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = 42sh_line_editor
 
 INCLUDEFOLDERS = -I./includes/ -I./libft/includes/ -g
 LIBFOLDERS = -L./libft/
-LIBS =  -lft -lncurses
+LIBS = -lft -lncurses
 
 CC = clang
 CFLAGS = -Wall -Werror -Wextra
@@ -40,9 +40,13 @@ SOURCES =	\
 			actions/action_move_cursor_right.c		\
 			actions/action_move_cursor_left.c		\
 			actions/action_move_cursor_word.c		\
+			actions/action_reposition_cursor.c		\
 													\
 			print_line.c							\
 			main.c									\
+													\
+			prompt.c								\
+			debug.c									\
 
 OBJECTS= $(SOURCES:.c=.o)
 OBJECTS := $(subst /,__,$(OBJECTS))

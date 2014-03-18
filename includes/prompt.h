@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_editor_static.h                               :+:      :+:    :+:   */
+/*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: acollin <acollin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/12 14:58:49 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/16 19:35:11 by acollin          ###   ########.fr       */
+/*   Created: 2014/03/15 12:10:58 by acollin           #+#    #+#             */
+/*   Updated: 2014/03/17 13:39:55 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_EDITOR_STATIC_H
-# define LINE_EDITOR_STATIC_H
+#ifndef PROMPT_H
+# define PROMPT_H
 
-# include <line_editor.h>
-# include <termios.h>
+typedef struct		s_prompt
+{
+	char		*line;
+}					t_prompt;
 
-void			print_line(t_edited_line *line);
-void			print_line_remove(t_edited_line *line);
-int				ft_outc(int c);
+t_prompt	*prompt_new(char *line);
+int			size_prompt(t_prompt *prompt);
+void		display_prompt(t_prompt *prompt);
 
-#endif
+#endif /* ! PROMPT_H */
+

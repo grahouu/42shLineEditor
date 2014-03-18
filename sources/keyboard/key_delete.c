@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 22:23:54 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/14 02:33:03 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/03/14 17:23:29 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int			key_delete_event(t_edited_line *line)
 {
-	if (line->curs_pos > 0)
+	if (line->data->curr != line->data->last)
 	{
 		if (line->esc_key)
 		{
