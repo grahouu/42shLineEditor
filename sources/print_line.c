@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/11 10:47:27 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/19 00:01:12 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/19 08:51:28 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ void				print_line(t_edited_line *line)
 	char			*letter;
 	t_atom			*tmp_curr;
 
-	tputs(tgetstr("cl", NULL), 1, ft_outc);
-//	reposition_cursor_begin(line, 0);
+	reposition_cursor_begin(line, 0);
 	display_prompt(line->prompt);
 	tmp_curr = line->data->curr;
 	line->data->curr = NULL;
