@@ -6,7 +6,7 @@
 #    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 14:37:36 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/03/17 16:16:35 by acollin          ###   ########.fr        #
+#    Updated: 2014/03/19 01:16:13 by acollin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = 42sh_line_editor
@@ -75,7 +75,7 @@ $(NAME) : $(OBJECTS)
 	@echo " $(OK_COLOR)Successful ✓$(NO_COLOR)"
 
 getlibs :
-	git clone https://bitbucket.org/vdefilip/libft/
+	git clone https://bitbucket.org/grahouu/libft42sh/
 
 updatelibs :
 	@echo "$(SILENT_COLOR)Searching LibFt updates...$(NO_COLOR)"
