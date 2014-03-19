@@ -6,7 +6,7 @@
 /*   By: acollin <acollin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 14:48:03 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/19 09:10:51 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/19 09:44:29 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,29 @@ void				reposition_cursor_curr(t_edited_line *line)
 {
 	int				len_line;
 	int				pos_x;
-	char			*letter;
+//	char			*letter;
 	t_atom			*tmp_atom;
+	int				test;
 	struct winsize	win;
 
 	ioctl(0, TIOCGWINSZ, &win);
 	len_line = line->data->len + line->len_prompt;
 	pos_x = ((ft_lst_curr_index(line->data) + line->len_prompt) % win.ws_col);
-	display_prompt(line->prompt);
+	test = line->data->len - ft_lst_curr_index(line->data);
+//	display_prompt(line->prompt);
 	tmp_atom = line->data->curr;
-	line->data->curr = NULL;
-	while (line->data->curr != tmp_atom)
+//	line->data->curr = NULL;
+	while (test--)
+		tputs(tgetstr("le", NULL), 1, ft_outc);
+/*	while (line->data->curr != tmp_atom)
 	{
+		tputs(tgetstr("nd", NULL), 1, ft_outc);
 		letter = ft_lst_next_content(line->data);
 		ft_putchar(*letter);
-	}
-	if (pos_x == 0)
+	}*/
+/*	if (pos_x == 0)
 	{
 		tputs(tgetstr("do", NULL), 1, ft_outc);
 		tputs(tgetstr("cr", NULL), 1, ft_outc);
-	}
+	}*/
 }

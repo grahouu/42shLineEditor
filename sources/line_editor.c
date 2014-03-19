@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 18:38:20 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/18 23:29:32 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/19 16:51:03 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static t_edited_line	*init_edited_line(t_prompt *prompt)
 	line->len_prompt = size_prompt(prompt);
 	line->prompt = prompt;
 	line->old_atom = 0;
+	line->win_nbchar = line->len_prompt;
 	line->data = ft_lst_new(NULL);
 	return (line);
 }

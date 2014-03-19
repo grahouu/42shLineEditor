@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/12 14:58:49 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/17 20:07:26 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/19 16:24:59 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct		s_edited_line
 	int				len_prompt;
 	int				len_old_line;
 	int				old_atom;
+	int				win_nbchar;
 	t_prompt		*prompt;
 	int				esc_key;
 }					t_edited_line;

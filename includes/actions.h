@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 22:56:54 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/17 21:51:16 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/19 16:21:44 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	remove_next_word(t_edited_line *line);
 void	action_add_char(int letter, t_edited_line *line);
 void	disable_escape(t_edited_line *line);
 void	switch_escape(t_edited_line *line);
-void	reposition_cursor_curr(t_edited_line *line, int flag);
+void	reposition_cursor_curr(t_edited_line *line);
 void	reposition_cursor_begin(t_edited_line *line, int flag);
 
 void	move_cursor_right(t_edited_line *line);
