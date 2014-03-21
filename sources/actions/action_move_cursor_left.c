@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 23:45:10 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/19 19:05:23 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/21 19:55:01 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void				move_cursor_left(t_edited_line *line)
 	debug_int(curr_pos);
 	debug("->WIN_NBCHAR");
 	debug_int(line->win_nbchar);
+	debug("->LEN_LINE");
+	debug_int(line->data->len + line->len_prompt);
 /*	debug("->NB_LINE");
 	debug_int(nb_line);
 	debug("->NB_LINE_MIN");

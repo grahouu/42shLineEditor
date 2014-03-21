@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/11 16:10:41 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/19 19:05:29 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/21 19:18:04 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 
-void static			reposition_begin(t_edited_line *line)
+static void				reposition_begin(t_edited_line *line)
 {
 	int				curr_nbline;
 	int				pos_curr;

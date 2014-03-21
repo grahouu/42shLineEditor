@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 18:38:20 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/19 16:51:03 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/21 19:55:03 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,25 @@ int					ft_outc(int c)
 static t_edited_line	*init_edited_line(t_prompt *prompt)
 {
 	t_edited_line		*line;
+	t_info				*info;
 
 	line = ft_memalloc(sizeof(*line));
-	line->len_prompt = size_prompt(prompt);
-	line->prompt = prompt;
-	line->old_atom = 0;
-	line->win_nbchar = line->len_prompt;
+	info = ft_memalloc(sizeof(*info));
 	line->data = ft_lst_new(NULL);
+	line->len_prompt = size_prompt(prompt);
+	line->win_nbchar = line->len_prompt;
+	line->prompt = prompt;
+	line->esc_key = 0;
+	line->info = info;
+	info->max_char = 0;
+	info->min_char = 0;
+	info->nb_char = 0;
+	info->col = 0;
+	info->row = 0;
+	info->curr_pos = 0;
+	info->curr_mod = 0;
+	info->last_mod = 0;
+	info->last_pos = 0;
 	return (line);
 }
 
@@ -72,7 +84,26 @@ int					line_editor(char **line, t_prompt *prompt)
 	edited_line = init_edited_line(prompt);
 	tputs(tgetstr("sc", NULL), 1, ft_outc);
 	display_prompt(prompt);
-	while ((ret = check_keyboard(edited_line)) > 0);
+	ret = 1;
+	while (ret > 0)
+	{
+		ret = check_keyboard(edited_line);
+		if (ret > 0)
+		{
+			debug("---------- AFTER ACTION ----------");
+			debug("->CURRENT");
+			debug_char(*((char *)edited_line->data->curr->content));
+			debug("->CURRENT_CURSOR");
+			if (edited_line->data->curr->next)
+			{
+				debug_char(*((char *)edited_line->data->curr->next->content));
+			}
+			else
+				debug("(NULL)");
+			debug("->WIN_NBCHAR");
+			debug_int(edited_line->win_nbchar);
+		}
+	}
 	*line = list_to_string(edited_line->data);
 	return (ret);
 }

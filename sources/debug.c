@@ -6,13 +6,13 @@
 /*   By: acollin <acollin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/15 13:01:31 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/19 09:08:15 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/21 18:52:07 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-# define FILE_DEBUG "/dev/ttys002"
+# define FILE_DEBUG "/dev/ttys004"
 
 FILE				*fd_debug(void)
 {

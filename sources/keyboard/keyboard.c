@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 21:55:54 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/16 20:02:14 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/21 19:55:07 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,8 @@ int				check_keyboard(t_edited_line *line)
 
 	key = 0;
 	read(0, (char*)&key, 4);
-/*	if (line->data->curr)
-		fprintf(fopen("/dev/ttys001", "w"), "%c\n", *((char *)line->data->curr->content));
-	else
-		fprintf(fopen("/dev/ttys001", "w"), "(NULL)\n");
-*/	if (key == KEY_ESC)
+	calcul_info(line);
+	if (key == KEY_ESC)
 		return (key_escape_event(line));
 	if (line->esc_key)
 		return (check_escaped_keyboard(line, key));
@@ -80,6 +77,5 @@ int				check_keyboard(t_edited_line *line)
 	if (key == KEY_DELETE)
 		return (key_delete_event(line));
 	action_add_char(key, line);
-//	fprintf(fopen("/dev/ttys001", "w"), "%s\n", tgetstr("ch", NULL));
 	return (1);
 }

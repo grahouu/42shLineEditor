@@ -6,7 +6,7 @@
 #    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 14:37:36 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/03/19 01:22:36 by cfeijoo          ###   ########.fr        #
+#    Updated: 2014/03/21 19:53:14 by acollin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = 42sh_line_editor
@@ -23,6 +23,7 @@ OBJECTS_FOLDER = objects/
 
 SOURCES =	\
 			line_editor.c							\
+			calcul_info.c							\
 			display_init.c							\
 			display_restore.c						\
 													\

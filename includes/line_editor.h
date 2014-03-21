@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/12 14:58:49 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/19 16:24:59 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/21 19:51:29 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,27 @@
 # include <libft.h>
 # include <termios.h>
 
+typedef struct		s_info
+{
+	int				max_char;
+	int				min_char;
+	int				nb_char;
+	int				col;
+	int				row;
+	int				curr_mod;
+	int				curr_pos;
+	int				last_mod;
+	int				last_pos;
+}					t_info;
+
 typedef struct		s_edited_line
 {
 	t_list			*data;
-	int				curs_pos;
-	int				len_line;
 	int				len_prompt;
-	int				len_old_line;
-	int				old_atom;
 	int				win_nbchar;
 	t_prompt		*prompt;
 	int				esc_key;
+	t_info			*info;
 }					t_edited_line;
 
 FILE			*fd_debug(void);
