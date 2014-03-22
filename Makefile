@@ -6,7 +6,7 @@
 #    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 14:37:36 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/03/21 19:53:14 by acollin          ###   ########.fr        #
+#    Updated: 2014/03/22 16:49:51 by acollin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = 42sh_line_editor
@@ -43,6 +43,7 @@ SOURCES =	\
 			actions/action_move_cursor_word.c		\
 			actions/action_reposition_cursor.c		\
 													\
+			bell.c									\
 			print_line.c							\
 			main.c									\
 													\

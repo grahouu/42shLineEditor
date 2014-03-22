@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 18:38:20 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/21 19:55:03 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/22 17:10:51 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <term.h>
-
-#include <stdio.h>
 
 int					ft_outc(int c)
 {
@@ -41,6 +39,7 @@ static t_edited_line	*init_edited_line(t_prompt *prompt)
 	line->len_prompt = size_prompt(prompt);
 	line->win_nbchar = line->len_prompt;
 	line->prompt = prompt;
+	line->custom_bell = 0;
 	line->esc_key = 0;
 	line->info = info;
 	info->max_char = 0;
@@ -82,7 +81,6 @@ int					line_editor(char **line, t_prompt *prompt)
 	t_edited_line	*edited_line;
 
 	edited_line = init_edited_line(prompt);
-	tputs(tgetstr("sc", NULL), 1, ft_outc);
 	display_prompt(prompt);
 	ret = 1;
 	while (ret > 0)
@@ -92,9 +90,12 @@ int					line_editor(char **line, t_prompt *prompt)
 		{
 			debug("---------- AFTER ACTION ----------");
 			debug("->CURRENT");
-			debug_char(*((char *)edited_line->data->curr->content));
+			if (edited_line->data->curr)
+				debug_char(*((char *)edited_line->data->curr->content));
+			else
+				debug("(NULL)");
 			debug("->CURRENT_CURSOR");
-			if (edited_line->data->curr->next)
+			if (edited_line->data->curr && edited_line->data->curr->next)
 			{
 				debug_char(*((char *)edited_line->data->curr->next->content));
 			}

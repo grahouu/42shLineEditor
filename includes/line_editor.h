@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/12 14:58:49 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/21 19:51:29 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/22 16:51:36 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct		s_info
 	int				max_char;
 	int				min_char;
 	int				nb_char;
+	int				len_line;
 	int				col;
 	int				row;
 	int				curr_mod;
@@ -37,6 +38,7 @@ typedef struct		s_edited_line
 	int				len_prompt;
 	int				win_nbchar;
 	t_prompt		*prompt;
+	int				custom_bell;
 	int				esc_key;
 	t_info			*info;
 }					t_edited_line;

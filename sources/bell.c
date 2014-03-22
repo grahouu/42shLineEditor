@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action_key_escape.c                                :+:      :+:    :+:   */
+/*   bell.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: acollin <acollin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/03/13 23:18:31 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/22 17:01:23 by acollin          ###   ########.fr       */
+/*   Created: 2014/03/22 16:45:21 by acollin           #+#    #+#             */
+/*   Updated: 2014/03/22 17:01:56 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <line_editor_static.h>
+#include <unistd.h>
 #include <term.h>
 #include <stdlib.h>
 
-void	disable_escape(t_edited_line *line)
+void		ding_bell(t_edited_line *line)
 {
-	if (line->esc_key)
+	if (line->custom_bell)
 	{
-		ding_bell(line);
-		line->esc_key = 0;
-	}
-}
-
-void	switch_escape(t_edited_line *line)
-{
-	if (line->esc_key)
-	{
-		ding_bell(line);
-		line->esc_key = 0;
+		if (fork() == 0)
+			execlp("afplay", "afplay", "audio/bell.mp3", (char *)0);
 	}
 	else
-		line->esc_key = 1;
+		tputs(tgetstr("bl", NULL), 1, ft_outc);
 }

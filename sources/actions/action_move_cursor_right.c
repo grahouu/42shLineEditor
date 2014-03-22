@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 23:45:10 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/19 19:07:41 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/22 15:40:04 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,17 @@
 #include "libft.h"
 #include "actions.h"
 #include <term.h>
-#include <sys/ioctl.h>
 
 void				cursor_reposition_curr(t_edited_line *line)
 {
-	int				curr_mod;
-	int				curr_pos;
-	struct winsize	win;
-
-	ioctl(0, TIOCGWINSZ, &win);
-	curr_pos = ft_lst_curr_index(line->data) + line->len_prompt;
-	curr_mod = curr_pos % win.ws_col;
+	calcul_info(line);
 	tputs(tgetstr("nd", NULL), 1, ft_outc);
-	if (!curr_mod)
+	if (!line->info->curr_mod)
 	{
 		tputs(tgetstr("do", NULL), 1, ft_outc);
 		tputs(tgetstr("cr", NULL), 1, ft_outc);
 	}
 }
-
 
 void				move_cursor_right(t_edited_line *line)
 {

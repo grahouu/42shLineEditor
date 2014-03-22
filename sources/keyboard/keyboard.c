@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 21:55:54 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/21 19:55:07 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/22 17:17:34 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ static int		check_escaped_keyboard(t_edited_line *line, int key)
 		line->esc_key = 0;
 		return (1);
 	}
+	if (key == KEY_HOME)
+	{
+		line->custom_bell = 1 - line->custom_bell;
+		return (1);
+	}
 	if (key == KEY_BACKSPACE)
 		return (key_backspace_event(line));
 	if (key == KEY_DELETE)
@@ -57,6 +62,11 @@ int				check_keyboard(t_edited_line *line)
 
 	key = 0;
 	read(0, (char*)&key, 4);
+
+	debug("KEYCODE : ");
+	debug_int(key);
+
+	get_win_size(line);
 	calcul_info(line);
 	if (key == KEY_ESC)
 		return (key_escape_event(line));

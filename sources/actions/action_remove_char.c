@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 22:55:00 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/21 19:18:07 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/22 16:04:39 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <term.h>
-#include <sys/ioctl.h>
 
 static int	is_space(char c)
 {
@@ -38,12 +37,9 @@ void		print_line_remove(t_edited_line *);
 static void				reposition_begin(t_edited_line *line)
 {
 	int				curr_nbline;
-	int				pos_curr;
-	struct winsize	win;
 
-	ioctl(0, TIOCGWINSZ, &win);
-	pos_curr = ft_lst_curr_index(line->data) + line->len_prompt;
-	curr_nbline = pos_curr / win.ws_col;
+	calcul_info(line);
+	curr_nbline = line->info->curr_pos / line->info->col;
 	tputs(tgetstr("cr", NULL), 1, ft_outc);
 	while (curr_nbline--)
 		tputs(tgetstr("up", NULL), 1, ft_outc);
@@ -52,31 +48,22 @@ static void				reposition_begin(t_edited_line *line)
 void		remove_previous_char(t_edited_line *line)
 {
 	t_atom		*tmp_curr;
-	int			last_mod;
-	struct winsize	win;
 
-	debug("---------- REMOVE PREVIOUSE CHAR ----------");
 	if (line->data->curr)
 	{
-		ioctl(0, TIOCGWINSZ, &win);
-		line->win_nbchar--;
+		line->info->nb_char--;
 		reposition_begin(line);
-//		sleep(1);
 		tputs(tgetstr("cd", NULL), 1, ft_outc);
 		ft_lst_del_atom(line->data, line->data->curr, &free);
-		last_mod = (line->data->len + line->len_prompt) % win.ws_col;
+		calcul_info(line);
 		tmp_curr = line->data->curr;
 		print_line(line);
-//		sleep(1);
 		if (line->data->curr != line->data->last)
 		{
-			debug("->CURR");
-			debug(line->data->curr->content);
-			if (!last_mod)
+			if (!line->info->last_mod)
 			{
 				line->data->curr = line->data->last;
 				ft_lst_prev_content(line->data);
-		//		tputs(tgetstr("le", NULL), 1, ft_outc);
 			}
 			else
 				line->data->curr = line->data->last;

@@ -6,7 +6,7 @@
 /*   By: acollin <acollin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/21 19:30:06 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/21 19:55:05 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/22 14:21:09 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ void				calcul_info(t_edited_line *line)
 	line->info->last_mod = line->info->last_pos % line->info->col;
 	line->info->max_char = line->info->col * line->info->row;
 	line->info->min_char = line->info->last_pos - line->info->nb_char;
+	line->info->len_line = (int)(line->data->len + line->len_prompt);
 }
