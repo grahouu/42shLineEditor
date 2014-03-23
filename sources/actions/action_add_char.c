@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/11 16:10:41 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/22 14:52:21 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/23 11:51:55 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ static void				reposition_begin(t_edited_line *line)
 		tputs(tgetstr("up", NULL), 1, ft_outc);
 }
 
+void				reposition_cursor_curr(t_edited_line *line)
+{
+	int				nb_le;
+
+	calcul_info(line);
+	nb_le = line->info->len_line - line->info->curr_pos;
+	while (nb_le--)
+		tputs(tgetstr("le", NULL), 1, ft_outc);
+}
+
 void				action_add_char(int letter, t_edited_line *line)
 {
 	char			*new_char;
@@ -39,8 +49,8 @@ void				action_add_char(int letter, t_edited_line *line)
 	if ((!line->info->last_mod && line->data->curr == line->data->last
 			&& line->info->max_char <= line->info->len_line)
 		|| (line->info->max_char < line->info->len_line
-			&& line->info->last_mod == 1 && line->data->curr != line->data->last))
-		line->win_nbchar = line->info->nb_char - line->info->col;
+		&& line->info->last_mod == 1 && line->data->curr != line->data->last))
+		line->info->nb_char = line->info->nb_char - line->info->col;
 	reposition_begin(line);
 	print_line(line);
 	if (line->info->curr_pos > line->info->min_char)

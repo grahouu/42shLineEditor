@@ -6,7 +6,7 @@
 /*   By: acollin <acollin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/15 12:10:58 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/17 13:39:55 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/23 11:39:01 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 typedef struct		s_prompt
 {
 	char		*line;
+	int			len;
 }					t_prompt;
 
 t_prompt	*prompt_new(char *line);

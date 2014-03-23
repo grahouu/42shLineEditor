@@ -6,16 +6,16 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/12 14:58:49 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/22 16:51:36 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/23 11:51:19 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LINE_EDITOR_H
 # define LINE_EDITOR_H
 
-# include <stdio.h>
+#include <stdio.h>
 # include "prompt.h"
-# include <libft.h>
+# include "libft.h"
 # include <termios.h>
 
 typedef struct		s_info
@@ -32,15 +32,20 @@ typedef struct		s_info
 	int				last_pos;
 }					t_info;
 
+typedef struct		s_option
+{
+	t_list			*historic;
+	t_prompt		*prompt;
+	int				mode;
+}					t_option;
+
 typedef struct		s_edited_line
 {
 	t_list			*data;
-	int				len_prompt;
-	int				win_nbchar;
-	t_prompt		*prompt;
 	int				custom_bell;
 	int				esc_key;
 	t_info			*info;
+	t_option		*option;
 }					t_edited_line;
 
 FILE			*fd_debug(void);
@@ -49,7 +54,7 @@ void			debug_char(char c);
 void			debug(char *str);
 void			debug_p(void *p);
 
-int			line_editor(char **line, t_prompt *prompt);
+int			line_editor(char **line, t_option *option);
 int			line_editor_init_display(struct termios *display_backup);
 void		line_editor_restore_display(struct termios *display_backup);
 

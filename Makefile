@@ -6,7 +6,7 @@
 #    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 14:37:36 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/03/22 16:49:51 by acollin          ###   ########.fr        #
+#    Updated: 2014/03/23 11:28:26 by acollin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = 42sh_line_editor
@@ -33,6 +33,7 @@ SOURCES =	\
 			keyboard/key_delete.c					\
 			keyboard/key_left.c						\
 			keyboard/key_right.c					\
+			keyboard/key_up.c						\
 													\
 			actions/action_add_char.c				\
 			actions/action_remove_char.c			\
@@ -41,7 +42,7 @@ SOURCES =	\
 			actions/action_move_cursor_right.c		\
 			actions/action_move_cursor_left.c		\
 			actions/action_move_cursor_word.c		\
-			actions/action_reposition_cursor.c		\
+			actions/action_key_up.c					\
 													\
 			bell.c									\
 			print_line.c							\

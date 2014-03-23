@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 22:01:06 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/14 02:33:13 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/03/23 11:08:31 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ int		key_backspace_event(t_edited_line *line);
 int		key_delete_event(t_edited_line *line);
 int		key_left_event(t_edited_line *line);
 int		key_right_event(t_edited_line *line);
+int		key_up_event(t_edited_line *line);
 
 #endif

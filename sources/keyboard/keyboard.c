@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 21:55:54 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/22 17:17:34 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/23 11:53:22 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int				check_keyboard(t_edited_line *line)
 		return (key_right_event(line));
 	if (key == KEY_LEFT)
 		return (key_left_event(line));
+	if (key == KEY_UP)
+		return (key_up_event(line));
 	if (key == KEY_RETURN)
 		return (0);
 	if (key == KEY_CTRL_C)

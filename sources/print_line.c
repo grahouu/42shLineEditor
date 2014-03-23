@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/11 10:47:27 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/21 18:00:26 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/23 11:18:21 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,17 @@ void				print_line_remove(t_edited_line *line)
 void				print_line(t_edited_line *line)
 {
 	char			*letter;
-	int				curr_pos;
-	int				curr_mod;
 	t_atom			*tmp_curr;
-	struct winsize	win;
 
-	ioctl(0, TIOCGWINSZ, &win);
-	display_prompt(line->prompt);
+	display_prompt(line->option->prompt);
 	tmp_curr = line->data->curr;
 	line->data->curr = NULL;
 	while ((letter = ft_lst_next_content(line->data)))
 		ft_putchar(*letter);
 	ft_lst_prev_content(line->data);
-	curr_pos = ft_lst_curr_index(line->data) + line->len_prompt;
-	curr_mod = curr_pos % win.ws_col;
+	calcul_info(line);
 	line->data->curr = tmp_curr;
-	if (!curr_mod && tmp_curr == line->data->last)
+	if (!line->info->curr_mod && tmp_curr == line->data->last)
 	{
 		tputs(tgetstr("do", NULL), 1, ft_outc);
 		tputs(tgetstr("cr", NULL), 1, ft_outc);

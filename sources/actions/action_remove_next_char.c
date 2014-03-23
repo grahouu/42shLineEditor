@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 22:55:00 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/14 17:25:48 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/22 19:50:42 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,44 @@
 #include <stdlib.h>
 #include <term.h>
 
-static int	is_space(char c)
+static void		reposition_begin(t_edited_line *line)
 {
-	if (c == '\t' || c == ' ')
-		return (1);
-	return (0);
+	int			curr_nbline;
+
+	line->info->nb_char--;
+	calcul_info(line);
+	curr_nbline = line->info->curr_pos / line->info->col;
+	tputs(tgetstr("cr", NULL), 1, ft_outc);
+	while (curr_nbline--)
+		tputs(tgetstr("up", NULL), 1, ft_outc);
+	tputs(tgetstr("cd", NULL), 1, ft_outc);
+	ft_lst_next_content(line->data);
+	ft_lst_del_atom(line->data, line->data->curr, &free);
+	calcul_info(line);
 }
 
-static int	is_correct_word_char(char c)
+void			remove_next_char(t_edited_line *line)
 {
-	if ((c >= 'a' && c <= 'z')
-		|| (c >= 'A' && c <= 'Z')
-		|| (c >= '0' && c <= '9'))
-		return (1);
-	return (0);
-}
+	t_atom		*tmp_curr;
 
-void		remove_next_char(t_edited_line *line)
-{
-	move_cursor_right(line);
-	remove_previous_char(line);
-}
-
-void		remove_next_word(t_edited_line *line)
-{
-	char	c;
-
-	c = *(char*)line->data->curr->content;
-	if (!is_space(c) && !is_correct_word_char(c))
-		remove_next_char(line);
-	else
+	reposition_begin(line);
+	tmp_curr = line->data->curr;
+	print_line(line);
+	if (line->data->curr != line->data->last)
 	{
-		while (line->data->curr
-			&& is_space(*(char*)line->data->curr->next->content))
-			remove_next_char(line);
-		while (line->data->curr
-			&& is_correct_word_char(*(char*)line->data->curr->next->content))
-			remove_next_char(line);
+		if (!line->info->last_mod)
+		{
+			if (line->data->curr == line->data->last->prev)
+			{
+				tputs(tgetstr("le", NULL), 1, ft_outc);
+				tputs(tgetstr("nd", NULL), 1, ft_outc);
+			}
+			line->data->curr = line->data->last;
+			ft_lst_prev_content(line->data);
+		}
+		else
+			line->data->curr = line->data->last;
+		while (line->data->curr != tmp_curr)
+			move_cursor_left(line);
 	}
 }
