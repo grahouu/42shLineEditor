@@ -6,7 +6,7 @@
 #    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 14:37:36 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/03/23 11:28:26 by acollin          ###   ########.fr        #
+#    Updated: 2014/03/23 16:21:15 by acollin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = 42sh_line_editor
@@ -26,6 +26,7 @@ SOURCES =	\
 			calcul_info.c							\
 			display_init.c							\
 			display_restore.c						\
+			global_editedline.c						\
 													\
 			keyboard/keyboard.c						\
 			keyboard/key_escape.c					\
@@ -34,6 +35,7 @@ SOURCES =	\
 			keyboard/key_left.c						\
 			keyboard/key_right.c					\
 			keyboard/key_up.c						\
+			keyboard/key_down.c						\
 													\
 			actions/action_add_char.c				\
 			actions/action_remove_char.c			\
@@ -43,6 +45,7 @@ SOURCES =	\
 			actions/action_move_cursor_left.c		\
 			actions/action_move_cursor_word.c		\
 			actions/action_key_up.c					\
+			actions/action_key_down.c				\
 													\
 			bell.c									\
 			print_line.c							\

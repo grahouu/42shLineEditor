@@ -6,12 +6,11 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 18:38:20 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/23 11:45:59 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/23 21:24:37 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <line_editor.h>
+#include "line_editor_static.h"
 #include <keyboard.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -81,12 +80,30 @@ static void			add_line_in_list(t_edited_line *line, char *newdata)
 	line->option->historic->curr = NULL;
 }
 
+static void			redim(int s)
+{
+	t_edited_line	*line;
+
+	(void)s;
+	line = get_edited_line();
+	get_win_size(line);
+	tputs(tgetstr("cl", NULL), 1, ft_outc);
+	print_line(line);
+	line->data->curr = line->data->last;
+	if (line->info->max_char >= line->info->len_line)
+		line->info->nb_char = line->info->len_line;
+	else
+		line->info->nb_char = /*line->info->len_line -*/ line->info->max_char - line->info->col + line->info->last_mod;
+}
+
 int					line_editor(char **line, t_option *option)
 {
 	int				ret;
 	t_edited_line	*edited_line;
 
+	signal(SIGWINCH, &redim);
 	edited_line = init_edited_line(option);
+	set_edited_line(edited_line);
 	display_prompt(option->prompt);
 	ret = 1;
 	while (ret > 0)
@@ -107,8 +124,16 @@ int					line_editor(char **line, t_option *option)
 			}
 			else
 				debug("(NULL)");
-			debug("->WIN_NBCHAR");
+			debug("->LEN_LINE");
+			debug_int(edited_line->data->len);
+			debug("->LAST_POS");
+			debug_int(edited_line->info->last_pos);
+			debug("->NB_CHAR_IN_WIN");
 			debug_int(edited_line->info->nb_char);
+			debug("->MAX_CHAR");
+			debug_int(edited_line->info->max_char);
+			debug("->MIN_CHAR");
+			debug_int(edited_line->info->min_char);
 		}
 	}
 	*line = list_to_string(edited_line->data);

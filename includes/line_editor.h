@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/12 14:58:49 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/23 11:51:19 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/23 18:33:50 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "prompt.h"
 # include "libft.h"
 # include <termios.h>
+
+# define ERR_EDITOR_CTRL_C -21
 
 typedef struct		s_info
 {

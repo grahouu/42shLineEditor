@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/12 14:58:49 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/22 19:39:34 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/23 16:27:36 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 void			print_line(t_edited_line *line);
 void			print_line_remove(t_edited_line *line);
 void			calcul_info(t_edited_line *line);
+void			set_edited_line(t_edited_line *new_line);
+t_edited_line	*get_edited_line(void);
 void			get_win_size(t_edited_line *line);
 int				ft_outc(int c);
 void			ding_bell(t_edited_line *line);

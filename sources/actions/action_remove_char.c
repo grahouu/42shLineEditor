@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 22:55:00 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/22 19:50:54 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/23 14:49:07 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,21 @@ void		remove_previous_char(t_edited_line *line)
 {
 	t_atom		*tmp_curr;
 
-	if (line->data->curr)
+	calcul_info(line);
+	if (line->data->curr && line->info->curr_pos > line->info->min_char)
 	{
 		line->info->nb_char--;
 		reposition_begin(line);
 		tputs(tgetstr("cd", NULL), 1, ft_outc);
 		ft_lst_del_atom(line->data, line->data->curr, &free);
 		calcul_info(line);
+		if ((line->info->curr_pos == line->info->len_line
+					&& line->info->max_char <= (line->info->len_line + 1)
+					&& line->info->last_mod == (line->info->col - 1))
+				|| (line->info->curr_pos != line->info->len_line
+					&& line->info->max_char <= line->info->len_line
+					&& !line->info->last_mod))
+			line->info->nb_char = line->info->nb_char + line->info->col;
 		tmp_curr = line->data->curr;
 		print_line(line);
 		if (line->data->curr != line->data->last)

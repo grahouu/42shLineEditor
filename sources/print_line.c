@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/11 10:47:27 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/23 11:18:21 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/23 15:31:02 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ void				print_line_remove(t_edited_line *line)
 	tputs(tgetstr("sc", NULL), 1, ft_outc);
 	tmp_curr = line->data->curr;
 	while ((letter = ft_lst_next_content(line->data)))
-		ft_putchar(*letter);
+	{
+		if (*letter != '	')
+			ft_putchar(*letter);
+		else
+			ft_putchar(' ');
+	}
 	line->data->curr = tmp_curr;
 	tputs(tgetstr("rc", NULL), 1, ft_outc);
 }
@@ -37,11 +42,17 @@ void				print_line(t_edited_line *line)
 	char			*letter;
 	t_atom			*tmp_curr;
 
+	tputs(tgetstr("cd", NULL), 1, ft_outc);
 	display_prompt(line->option->prompt);
 	tmp_curr = line->data->curr;
 	line->data->curr = NULL;
 	while ((letter = ft_lst_next_content(line->data)))
-		ft_putchar(*letter);
+	{
+		if (*letter != '	')
+			ft_putchar(*letter);
+		else
+			ft_putchar(' ');
+	}
 	ft_lst_prev_content(line->data);
 	calcul_info(line);
 	line->data->curr = tmp_curr;

@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 21:55:54 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/23 11:53:22 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/23 21:24:33 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 static int		key_ctrl_d(t_edited_line *line)
 {
 	if (line->data->len)
-	{	
+	{
 		tputs(tgetstr("bl", NULL), 1, ft_outc);
 		return (1);
 	}
@@ -46,6 +46,7 @@ static int		check_escaped_keyboard(t_edited_line *line, int key)
 	if (key == KEY_HOME)
 	{
 		line->custom_bell = 1 - line->custom_bell;
+		line->esc_key = 0;
 		return (1);
 	}
 	if (key == KEY_BACKSPACE)
@@ -78,16 +79,19 @@ int				check_keyboard(t_edited_line *line)
 		return (key_left_event(line));
 	if (key == KEY_UP)
 		return (key_up_event(line));
+	if (key == KEY_DOWN)
+		return (key_down_event(line));
 	if (key == KEY_RETURN)
 		return (0);
 	if (key == KEY_CTRL_C)
-		return (-1);
+		return (ERR_EDITOR_CTRL_C);
 	if (key == KEY_CTRL_D)
 		return (key_ctrl_d(line));
 	if (key == KEY_BACKSPACE)
 		return (key_backspace_event(line));
 	if (key == KEY_DELETE)
 		return (key_delete_event(line));
-	action_add_char(key, line);
+	if ((unsigned int) key == KEY_TAB || ft_isprint(key))
+		action_add_char(key, line);
 	return (1);
 }
