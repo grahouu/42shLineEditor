@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 22:01:06 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/23 15:39:32 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 17:33:52 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@
 /*
 **	Shell return values
 */
-# define CTRLD_VALUE		-20
+# define CTRLD_VALUE		-0
 
 /*
 **	Lengths

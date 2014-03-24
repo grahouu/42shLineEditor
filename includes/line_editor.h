@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/12 14:58:49 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/23 18:33:50 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 17:51:49 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <termios.h>
 
 # define ERR_EDITOR_CTRL_C -21
+# define NORMAL_MODE 5
+# define NOFINISH_MODE 6
+# define EDITED_STOP 1
+# define EDITED_GOON 2
 
 typedef struct		s_info
 {
@@ -58,6 +62,8 @@ void			debug_p(void *p);
 
 int			line_editor(char **line, t_option *option);
 int			line_editor_init_display(struct termios *display_backup);
+int			line_editor_init_display_start(struct termios *display_backup);
 void		line_editor_restore_display(struct termios *display_backup);
+void		line_editor_restore_display_end(struct termios *display_backup);
 
 #endif

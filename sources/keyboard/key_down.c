@@ -6,7 +6,7 @@
 /*   By: acollin <acollin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/23 15:32:32 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/23 15:33:47 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 15:48:40 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@
 int				key_down_event(t_edited_line *line)
 {
 	action_key_down(line);
-	return (1);
+	return (EDITED_GOON);
 }

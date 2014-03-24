@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 13:31:07 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/13 01:59:54 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/03/24 17:49:50 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 #include <stdlib.h>
 
 void			line_editor_restore_display(struct termios *display_backup)
+{
+	if (tcsetattr(0, TCSANOW, display_backup) == -1)
+		exit(-1);
+}
+
+void			line_editor_restore_display_end(struct termios *display_backup)
 {
 	if (tcsetattr(0, TCSANOW, display_backup) == -1)
 		exit(-1);

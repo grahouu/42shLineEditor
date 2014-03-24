@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/11 10:47:27 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/23 15:31:02 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 16:26:37 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "actions.h"
 #include <sys/ioctl.h>
 
-void				print_line_remove(t_edited_line *line)
+/*void				print_line_remove(t_edited_line *line)
 {
 	char			*letter;
 	t_atom			*tmp_curr;
@@ -35,7 +35,7 @@ void				print_line_remove(t_edited_line *line)
 	}
 	line->data->curr = tmp_curr;
 	tputs(tgetstr("rc", NULL), 1, ft_outc);
-}
+}*/
 
 void				print_line(t_edited_line *line)
 {

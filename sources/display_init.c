@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 21:13:12 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/14 14:19:33 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 17:51:44 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,22 @@ int						line_editor_init_display(struct termios *display_backup)
 	term.c_cc[VTIME] = 0;
 	if (tcsetattr(0, TCSANOW, &term) == -1)
 		return (-1);
+	return (0);
+}
+
+int						line_editor_init_display_start(struct termios *disp_bp)
+{
+	struct termios		term;
+
+	set_terminfo_db();
+	if (tcgetattr(0, &term) == -1)
+		return (-1);
+	tcgetattr(0, disp_bp);
+	term.c_lflag &= ~(ICANON | ECHO | ISIG);
+	term.c_cc[VMIN] = 1;
+	term.c_cc[VTIME] = 0;
+	if (tcsetattr(0, TCSANOW, &term) == -1)
+		return (-1);
+	tputs(tgetstr("ti", NULL), 1, ft_outc);
 	return (0);
 }

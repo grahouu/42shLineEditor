@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 22:52:25 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/14 01:35:09 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/03/24 15:47:50 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@
 int				key_right_event(t_edited_line *line)
 {
 	move_cursor_right(line);
-	return (1);
+	return (EDITED_GOON);
 }

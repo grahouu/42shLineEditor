@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 18:38:20 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/23 21:24:37 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 17:51:39 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,37 +52,10 @@ static t_edited_line	*init_edited_line(t_option *option)
 	return (line);
 }
 
-static char			*list_to_string(t_list *line)
-{
-	char			*string;
-	char			*current;
-	char			*letter;
-
-	string = (char*)malloc((line->len + 1) * sizeof(char));
-	if (string)
-	{
-		current = string;
-		line->curr = NULL;
-		while ((letter = (char*)ft_lst_next_content(line)))
-		{
-			*current = *letter;
-			current++;
-		}
-		*current = 0;
-	}
-	return (string);
-}
-
-static void			add_line_in_list(t_edited_line *line, char *newdata)
-{
-	if (newdata)
-		ft_lst_pushend(line->option->historic, newdata);
-	line->option->historic->curr = NULL;
-}
-
 static void			redim(int s)
 {
 	t_edited_line	*line;
+	int				maxchar;
 
 	(void)s;
 	line = get_edited_line();
@@ -93,50 +66,29 @@ static void			redim(int s)
 	if (line->info->max_char >= line->info->len_line)
 		line->info->nb_char = line->info->len_line;
 	else
-		line->info->nb_char = /*line->info->len_line -*/ line->info->max_char - line->info->col + line->info->last_mod;
+	{
+		maxchar = line->info->max_char - line->info->col;
+		line->info->nb_char = maxchar + line->info->last_mod;
+	}
 }
 
 int					line_editor(char **line, t_option *option)
 {
 	int				ret;
 	t_edited_line	*edited_line;
+	struct termios	display_backup;
 
+	line_editor_init_display(&display_backup);
 	signal(SIGWINCH, &redim);
 	edited_line = init_edited_line(option);
 	set_edited_line(edited_line);
 	display_prompt(option->prompt);
-	ret = 1;
-	while (ret > 0)
-	{
+	ret = EDITED_GOON;
+	while (ret > EDITED_STOP)
 		ret = check_keyboard(edited_line);
-		if (ret > 0)
-		{
-			debug("---------- AFTER ACTION ----------");
-			debug("->CURRENT");
-			if (edited_line->data->curr)
-				debug_char(*((char *)edited_line->data->curr->content));
-			else
-				debug("(NULL)");
-			debug("->CURRENT_CURSOR");
-			if (edited_line->data->curr && edited_line->data->curr->next)
-			{
-				debug_char(*((char *)edited_line->data->curr->next->content));
-			}
-			else
-				debug("(NULL)");
-			debug("->LEN_LINE");
-			debug_int(edited_line->data->len);
-			debug("->LAST_POS");
-			debug_int(edited_line->info->last_pos);
-			debug("->NB_CHAR_IN_WIN");
-			debug_int(edited_line->info->nb_char);
-			debug("->MAX_CHAR");
-			debug_int(edited_line->info->max_char);
-			debug("->MIN_CHAR");
-			debug_int(edited_line->info->min_char);
-		}
-	}
 	*line = list_to_string(edited_line->data);
 	add_line_in_list(edited_line, *line);
+	line_editor_restore_display(&display_backup);
+	ft_putchar('\n');
 	return (ret);
 }

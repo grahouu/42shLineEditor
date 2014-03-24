@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 22:55:00 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/23 14:49:07 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 16:24:44 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ static int	is_correct_word_char(char c)
 		return (1);
 	return (0);
 }
-
-void		print_line_remove(t_edited_line *);
 
 static void				reposition_begin(t_edited_line *line)
 {

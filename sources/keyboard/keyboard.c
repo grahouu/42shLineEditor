@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 21:55:54 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/23 21:24:33 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 16:15:00 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int		key_ctrl_d(t_edited_line *line)
 	if (line->data->len)
 	{
 		tputs(tgetstr("bl", NULL), 1, ft_outc);
-		return (1);
+		return (EDITED_GOON);
 	}
 	else
 		return (CTRLD_VALUE);
@@ -60,13 +60,11 @@ static int		check_escaped_keyboard(t_edited_line *line, int key)
 int				check_keyboard(t_edited_line *line)
 {
 	int			key;
+	int			ret;
 
 	key = 0;
-	read(0, (char*)&key, 4);
-
-	debug("KEYCODE : ");
-	debug_int(key);
-
+	if ((ret = read(0, (char*)&key, 4)) == -1)
+		return (ret);
 	get_win_size(line);
 	calcul_info(line);
 	if (key == KEY_ESC)
@@ -82,8 +80,8 @@ int				check_keyboard(t_edited_line *line)
 	if (key == KEY_DOWN)
 		return (key_down_event(line));
 	if (key == KEY_RETURN)
-		return (0);
-	if (key == KEY_CTRL_C)
+		return (EDITED_STOP);
+	if (key == KEY_CTRL_C && line->option->mode == NORMAL_MODE)
 		return (ERR_EDITOR_CTRL_C);
 	if (key == KEY_CTRL_D)
 		return (key_ctrl_d(line));
@@ -93,5 +91,5 @@ int				check_keyboard(t_edited_line *line)
 		return (key_delete_event(line));
 	if ((unsigned int) key == KEY_TAB || ft_isprint(key))
 		action_add_char(key, line);
-	return (1);
+	return (EDITED_GOON);
 }
