@@ -6,12 +6,12 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 18:38:20 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/24 17:51:39 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 18:15:07 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_editor_static.h"
-#include <keyboard.h>
+#include "keyboard.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>

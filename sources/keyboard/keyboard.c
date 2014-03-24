@@ -6,17 +6,15 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 21:55:54 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/24 16:15:00 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 18:42:20 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <line_editor_static.h>
-#include <keyboard.h>
+#include "line_editor_static.h"
+#include "keyboard.h"
+#include "actions.h"
 #include <unistd.h>
 #include <term.h>
-#include <actions.h>
-#include <stdio.h>
 
 static int		key_ctrl_d(t_edited_line *line)
 {
@@ -75,9 +73,9 @@ int				check_keyboard(t_edited_line *line)
 		return (key_right_event(line));
 	if (key == KEY_LEFT)
 		return (key_left_event(line));
-	if (key == KEY_UP)
+	if (key == KEY_UP && line->option->mode == NORMAL_MODE)
 		return (key_up_event(line));
-	if (key == KEY_DOWN)
+	if (key == KEY_DOWN && line->option->mode == NORMAL_MODE)
 		return (key_down_event(line));
 	if (key == KEY_RETURN)
 		return (EDITED_STOP);

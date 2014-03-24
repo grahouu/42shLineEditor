@@ -6,12 +6,12 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 22:23:54 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/24 15:49:43 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 18:17:21 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <line_editor_static.h>
-#include <actions.h>
+#include "line_editor_static.h"
+#include "actions.h"
 
 int			key_backspace_event(t_edited_line *line)
 {
