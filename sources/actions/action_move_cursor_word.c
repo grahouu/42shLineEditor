@@ -6,13 +6,13 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/14 02:12:40 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/23 21:24:28 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 18:03:53 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <line_editor_static.h>
+#include "line_editor_static.h"
 #include <term.h>
-#include <actions.h>
+#include "actions.h"
 
 static int	is_space(char c)
 {

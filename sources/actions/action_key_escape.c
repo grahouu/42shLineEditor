@@ -6,11 +6,11 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 23:18:31 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/22 17:01:23 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 18:02:42 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <line_editor_static.h>
+#include "line_editor_static.h"
 #include <term.h>
 #include <stdlib.h>
 
