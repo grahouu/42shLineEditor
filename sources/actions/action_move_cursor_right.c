@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 23:45:10 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/22 15:40:04 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 19:53:51 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,8 @@ void				move_cursor_right(t_edited_line *line)
 	if (line->data->curr)
 		cursor_reposition_curr(line);
 	else
+	{
+		ding_bell(line);
 		ft_lst_prev_content(line->data);
+	}
 }

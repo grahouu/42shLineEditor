@@ -6,7 +6,7 @@
 /*   By: acollin <acollin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/22 21:19:43 by acollin           #+#    #+#             */
-/*   Updated: 2014/03/24 16:22:58 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 19:50:37 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void				action_key_up(t_edited_line *line)
 {
 	if (!line->option->historic->len
 	|| (line->option->historic->curr && !line->option->historic->curr->prev))
+	{
+		ding_bell(line);
 		return ;
+	}
 	else
 		ft_lst_prev_content(line->option->historic);
 	reposition_begin(line);

@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 21:55:54 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/24 18:42:20 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 19:53:55 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,6 @@ static int		check_escaped_keyboard(t_edited_line *line, int key)
 	if (key == 'b' || key == 'B')
 	{
 		move_cursor_word_left(line);
-		line->esc_key = 0;
-		return (1);
-	}
-	if (key == 'f' || key == 'F')
-	{
-		move_cursor_word_right(line);
 		line->esc_key = 0;
 		return (1);
 	}

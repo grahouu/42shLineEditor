@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 23:45:10 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/03/24 18:03:01 by acollin          ###   ########.fr       */
+/*   Updated: 2014/03/24 19:52:50 by acollin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,6 @@ void				move_cursor_left(t_edited_line *line)
 			ft_lst_prev_content(line->data);
 		}
 	}
+	else
+		ding_bell(line);
 }
